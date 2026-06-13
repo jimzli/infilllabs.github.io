@@ -1,0 +1,116 @@
+---
+---
+:root {
+    --bg-color: #f4f7f6; /* Light background */
+    --surface-color: #ffffff; /* White cards/elements */
+    --dark-blue: darkblue; /* Dark blue for ALL text and accents */
+    --logo-black: #000000;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--dark-blue);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.hero {
+    padding: 4rem 5rem;
+    border: 3px solid var(--dark-blue);
+    border-radius: 12px;
+    background-color: var(--surface-color);
+    box-shadow: 12px 12px 0px var(--dark-blue);
+    transition: transform 0.2s ease-in-out;
+}
+
+.hero:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 16px 16px 0px var(--dark-blue);
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0;
+    color: var(--dark-blue);
+}
+
+/* Make sure links and selections match the theme */
+::selection {
+    background-color: var(--dark-blue);
+    color: var(--bg-color);
+}
+
+/* Mailto Link Styling */
+.hero-link {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Keeps the text dark blue */
+    display: inline-block; /* Keeps the layout structured properly */
+}
+
+/* Optional: Add a slight fade effect to the text when hovering over the card */
+.hero-link:hover .hero {
+    cursor: pointer;
+}
+
+.cube-icon {
+    width: 200px;
+    height: 200px;
+    color: var(--logo-black);
+}
+
+/* Text layout wrapper that stacks and centers the brand mark */
+.text-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--logo-black);
+}
+
+.infill-text {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.2rem;
+}
+
+.labs-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-left: 0.2rem;
+}
+
+.square-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--logo-black);
+}
+
+.labs-text {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
