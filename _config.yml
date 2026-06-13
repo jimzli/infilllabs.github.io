@@ -1,3 +1,14 @@
-title: infill ■ labs
+title: infill labs
 description: Solid engineering
 
+# Compress generated CSS
+sass:
+  style: compressed
+
+# Compress generated HTML via _layouts/compress.html
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  blanklines: false
+  profile: false
