@@ -5,6 +5,7 @@
     --surface-color: #ffffff; /* White cards/elements */
     --dark-blue: darkblue; /* Dark blue for ALL text and accents */
     --logo-black: #000000;
+    --mesh-color: rgba(0, 0, 139, 0.06); /* Faint darkblue for the background mesh */
 }
 
 *,
@@ -15,6 +16,10 @@
 
 body {
     background-color: var(--bg-color);
+    /* Faint diamond mesh in the brand blue, echoing the infill lattice */
+    background-image:
+        repeating-linear-gradient(30deg, var(--mesh-color) 0 1px, transparent 1px 46px),
+        repeating-linear-gradient(-30deg, var(--mesh-color) 0 1px, transparent 1px 46px);
     color: var(--dark-blue);
     font-family: 'Montserrat', sans-serif;
     margin: 0;
