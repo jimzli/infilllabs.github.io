@@ -8,16 +8,22 @@
     --mesh-color: rgba(0, 0, 139, 0.06); /* Faint darkblue for the background mesh */
 }
 
-/* Dark theme: auto-applied when the browser/OS prefers dark */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #0b0f1a;       /* Deep navy page background */
-        --surface-color: #141a2b;  /* Card surface */
-        --dark-blue: #7d9bff;      /* Lightened blue for text, border, shadow */
-        --logo-black: #eef1f7;     /* Near-white for the logo mark and wordmark */
-        --mesh-color: rgba(125, 155, 255, 0.08);
-    }
+/* Dark theme palette, shared by OS auto-detection and the manual toggle */
+@mixin dark-theme {
+    --bg-color: #0b0f1a;       /* Deep navy page background */
+    --surface-color: #141a2b;  /* Card surface */
+    --dark-blue: #7d9bff;      /* Lightened blue for text, border, shadow */
+    --logo-black: #eef1f7;     /* Near-white for the logo mark and wordmark */
+    --mesh-color: rgba(125, 155, 255, 0.08);
 }
+
+/* Auto-apply dark when the OS prefers it, unless the user forced light */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { @include dark-theme; }
+}
+
+/* Manual override via the toggle */
+:root[data-theme="dark"] { @include dark-theme; }
 
 *,
 *::before,
@@ -176,4 +182,61 @@ h1 {
     .labs-row {
         margin-bottom: 2rem;
     }
+}
+
+/* Subtle theme toggle, fixed in the top-right corner */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--dark-blue);
+    opacity: 0.35;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    opacity: 0.85;
+}
+
+.theme-toggle svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+/* Show the moon in light mode (tap for dark), the sun in dark mode (tap for light) */
+.theme-toggle .icon-sun {
+    display: none;
+}
+
+:root.is-dark .theme-toggle .icon-sun {
+    display: block;
+}
+
+:root.is-dark .theme-toggle .icon-moon {
+    display: none;
+}
+
+/* Subtle copyright footer, fixed along the bottom */
+.site-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+    margin: 0;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--dark-blue);
+    opacity: 0.3;
 }
