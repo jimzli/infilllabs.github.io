@@ -8,6 +8,17 @@
     --mesh-color: rgba(0, 0, 139, 0.06); /* Faint darkblue for the background mesh */
 }
 
+/* Dark theme: auto-applied when the browser/OS prefers dark */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #0b0f1a;       /* Deep navy page background */
+        --surface-color: #141a2b;  /* Card surface */
+        --dark-blue: #7d9bff;      /* Lightened blue for text, border, shadow */
+        --logo-black: #eef1f7;     /* Near-white for the logo mark and wordmark */
+        --mesh-color: rgba(125, 155, 255, 0.08);
+    }
+}
+
 *,
 *::before,
 *::after {
