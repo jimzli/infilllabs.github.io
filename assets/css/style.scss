@@ -89,49 +89,110 @@ h1 {
     color: var(--bg-color);
 }
 
-/* Mailto Link Styling */
-.hero-link {
-    position: relative; /* Anchors the tooltip */
-    text-decoration: none; /* Removes the underline */
-    color: inherit; /* Keeps the text dark blue */
-    display: inline-block; /* Keeps the layout structured properly */
+/* Wrapper that anchors the "say hello" popup above the card */
+.hero-wrap {
+    position: relative;
+    display: inline-block;
 }
 
-/* Optional: Add a slight fade effect to the text when hovering over the card */
-.hero-link:hover .hero {
-    cursor: pointer;
+/* Animatable angle that drives the countdown ring (needs @property) */
+@property --countdown {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 360deg;
 }
 
-/* "Say hello" tooltip, styled to match the card (border + offset shadow) */
-.hero-link::after {
-    content: "say hello";
+/* Sweep the ring from full (360deg) down to empty (0deg) over the lifetime */
+@keyframes say-hello-countdown {
+    from { --countdown: 360deg; }
+    to   { --countdown: 0deg; }
+}
+
+/* "Say hello" popup — the only mailto target, styled to match the card */
+.say-hello {
     position: absolute;
     left: 50%;
     bottom: 100%;
     transform: translate(-50%, 0);
     margin-bottom: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     padding: 0.45rem 0.9rem;
     background-color: var(--surface-color);
     color: var(--dark-blue);
-    border: 2px solid var(--dark-blue);
     border-radius: 6px;
     box-shadow: 4px 4px 0px var(--dark-blue);
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    /* On hide, linger for 15s (delay) before fading out */
+    transition:
+        opacity 0.3s ease 15s,
+        transform 0.3s ease 15s,
+        visibility 0s linear 15.3s,
+        pointer-events 0s linear 15s;
 }
 
-.hero-link:hover::after,
-.hero-link:focus-visible::after {
+/* Transparent bridge across the gap so the cursor can travel card -> popup */
+.say-hello::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 0.5rem;
+}
+
+/* Countdown ring — a depleting conic-gradient border around the popup.
+   Runs by default (counts down) and is reset to full while hovered/focused. */
+.say-hello::after {
+    content: "";
+    position: absolute;
+    inset: 0; /* sits exactly on the pill edge — it IS the border */
+    border-radius: 6px;
+    padding: 2px; /* ring thickness, matching a normal border */
+    /* Solid blue for time remaining, faint track for time elapsed */
+    background: conic-gradient(
+        var(--dark-blue) var(--countdown),
+        color-mix(in srgb, var(--dark-blue) 20%, transparent) 0deg
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: say-hello-countdown 15s linear forwards;
+}
+
+.say-hello .mail-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+}
+
+.hero-wrap:hover .say-hello,
+.say-hello:focus-visible {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transform: translate(-50%, -0.25rem);
+    /* On show, appear quickly with no delay */
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s, pointer-events 0s;
+}
+
+/* While hovered/focused, pause and refill the ring (no countdown) */
+.hero-wrap:hover .say-hello::after,
+.say-hello:focus-visible::after {
+    animation: none;
+    --countdown: 360deg;
 }
 
 .cube-icon {

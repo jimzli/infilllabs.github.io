@@ -1,18 +1,25 @@
 ---
 layout: default
 ---
-<a href="#" class="hero-link" aria-label="Say hello" onclick="const user = 'hello'; const domain = 'infilllabs.io'; window.location.href = 'mailto:' + user + '@' + domain; return false;">
+<div class="hero-wrap">
+    <a href="#" class="say-hello" aria-label="Say hello" onclick="const user = 'hello'; const domain = 'infilllabs.io'; window.location.href = 'mailto:' + user + '@' + domain; return false;">
+        <svg class="mail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m2 7 10 6 10-6"/>
+        </svg>
+        <span>say hello</span>
+    </a>
     <div class="hero">
         <div class="logo-container">
             <svg class="cube-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
                 <!-- Outer Hexagon Shell -->
                 <polygon points="50,5 89,27.5 89,72.5 50,95 11,72.5 11,27.5" stroke-width="4"/>
-                
+
                 <!-- Inner Y-Axes -->
                 <line x1="50" y1="50" x2="50" y2="95" stroke-width="4" />
                 <line x1="50" y1="50" x2="11" y2="27.5" stroke-width="4" />
                 <line x1="50" y1="50" x2="89" y2="27.5" stroke-width="4" />
-                
+
                 <!-- Right Face Infill Lattice (Simple Rectilinear Grid) -->
                 <!-- Isometric horizontal lines -->
                 <line x1="50" y1="65" x2="89" y2="42.5" stroke-width="3" />
@@ -31,4 +38,4 @@ layout: default
         </div>
         <h1>Solid Engineering</h1>
     </div>
-</a>
+</div>
